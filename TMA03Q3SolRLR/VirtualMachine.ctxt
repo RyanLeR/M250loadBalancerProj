@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=VirtualMachine
+comment0.text=\r\n\ Question\ 3(c)\r\n\ \r\n\ A\ class\ to\ create\ Virtual\ Machine\ objects\ that\ hold\ a\ state\r\n\ that\ includes\ machine\ creation\ number,\ machine\ ID,\r\n\ CPU\ processing\ power,\ physical\ memory\ and\ \r\n\ number\ of\ connected\ users\r\n\r\n\ @author\ Ryan\ Le\ Roux\r\n\ @version\ 1.0\r\n
+comment1.params=newCpuMaxGHz\ newPhysicalMemory
+comment1.target=VirtualMachine(double,\ int)
+comment1.text=\r\n\ Question\ 3(c)\r\n\ \r\n\ The\ parameterised\ constructor\ expects\ two\ arguments\ \r\n\ namely\ newCpuMaxGHz\ and\ newPhysicalMemory.\ Number\ of\ connected\r\n\ users\ is\ initialised\ to\ 0\r\n
+comment2.params=
+comment2.target=java.lang.String\ getID()
+comment2.text=\r\n\ Question\ 3(c)\r\n\ \r\n\ This\ method\ acts\ as\ an\ accessor,\ to\ provide\r\n\ the\ machineID\ of\ the\ virtual\ machine\ object\r\n\r\n\ @return\ The\ machine\ ID\ is\ returned\r\n
+comment3.params=
+comment3.target=double\ getCpuSpeed()
+comment3.text=\r\n\ Question\ 3(c)\r\n\ \r\n\ This\ method\ acts\ as\ an\ accessor,\ to\ provide\r\n\ the\ max\ CPU\ speed\ of\ a\ virtual\ machine\ instance\r\n\r\n\ @return\ Returns\ the\ max\ CPU\ speed\ of\ the\ object\r\n
+comment4.params=
+comment4.target=int\ getPhysMemory()
+comment4.text=\r\n\ Question\ 3(c)\r\n\ \r\n\ This\ method\ acts\ as\ an\ accessor,\ to\ provide\r\n\ the\ amount\ of\ phyiscal\ memory\ for\ an\ instance\r\n\ of\ virtual\ machine\r\n\r\n\ @return\ The\ amount\ of\ physical\ memory\ is\ returned\r\n
+comment5.params=
+comment5.target=int\ getNumUsers()
+comment5.text=\r\n\ Question\ 3(c)\r\n\ \r\n\ This\ method\ acts\ as\ an\ accessor,\ to\ provide\r\n\ the\ number\ of\ connected\ users\ for\ an\ instance\r\n\ of\ virtual\ machine\r\n\r\n\ @return\ Returns\ the\ number\ of\ connected\ users\r\n
+numComments=6
