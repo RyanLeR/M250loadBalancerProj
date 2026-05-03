@@ -155,4 +155,29 @@ public class VirtualMachine
         VirtualMachine comparedMachine = (VirtualMachine) obj;
         return comparedMachine.getMachineID().equals(getMachineID());
     }
+    
+    
+    /**
+     * Question 3(c)(ii)
+     * Overridden method of Object class. Returns unique identifier
+     * to allow VirtualMachine objects to be stored in a set
+     * 
+     * @return Unique hashcode for instance of virtual machine
+     */
+    @Override
+    public int hashCode()
+    {
+        return getMachineID().hashCode();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
