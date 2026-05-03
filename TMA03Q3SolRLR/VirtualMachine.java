@@ -132,11 +132,13 @@ public class VirtualMachine
      * the invoking object has the same ID as the one
      * passed as an argument.
      * 
-     *@return True if they have the same machine ID, false if not
+     *@return True if they have the same machine ID or are same
+     *same object, false if not
      */
     @Override
     public boolean equals(Object obj)
     {
+        //if same memory address, obviously is same object
         if(obj == this)
         {
             return true;
@@ -147,6 +149,9 @@ public class VirtualMachine
             return false;
         }
         
+        /**If not same memory address but of same object type, check then if
+         * machineID is the same. If so, return true and if not, return false
+         */
         VirtualMachine comparedMachine = (VirtualMachine) obj;
         return comparedMachine.getMachineID().equals(getMachineID());
     }
