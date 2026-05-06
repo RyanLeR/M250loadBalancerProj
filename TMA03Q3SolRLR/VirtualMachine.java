@@ -10,6 +10,8 @@
  * @author Ryan Le Roux
  * @version 1.0
  */
+
+
 public class VirtualMachine
 {
     //Question 3(c)
@@ -23,6 +25,7 @@ public class VirtualMachine
     private int physicalMemory;
     private int connectedUsers;
     
+
     /**
      * Question 3(c)
      * 
@@ -52,8 +55,8 @@ public class VirtualMachine
     @Override
     public String toString()
     {
-        String returnedString = "Virtual machine " + getMachineID() + " has " + getCpuSpeed() + "\n"
-        + getPhysMemory() + "Gigabytes physical memory , and currently has" + getNumUsers() +
+        String returnedString = "Virtual machine " + "'" + getMachineID() + "'" + " has a max CPU speed of " + getCpuSpeed() + "," + "\n"
+        + "has " + getPhysMemory() + " Gigabytes of physical memory and currently has " + getNumUsers() +
         " users connected.";
         
         return returnedString;
@@ -171,9 +174,11 @@ public class VirtualMachine
     }
     
     
+    public void compareTo()
     
-    
-    
+    {
+        //complete
+    }
     
     
     

@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=LoadBalancer
+comment0.text=\r\n\ Question\ 4(a)\r\nThis\ class\ creates\ load\ balancer\ objects,\ \r\nto\ store\ and\ help\ manager\ a\ number\ of\ virtual\r\nmachines\ in\ a\ theoretical\ small\ private\ network\r\n\r\n\ @author\ Ryan\ Le\ Roux\r\n\ @version\ 1.0\r\n
+comment1.params=newName
+comment1.target=LoadBalancer(java.lang.String)
+comment1.text=\r\n\ The\ constructor\ for\ LoadBalancer\ objects\ initialises\r\n\ two\ fields.\ One\ is\ for\ the\ object's\ name,\ passed\r\n\ as\ an\ argument\ and\ another\ for\ an\ empty\ TreeMap\ \r\n\ that\ later\ will\ hold\ Virtual\r\n\ Machine\ objects.\r\n
+comment2.params=
+comment2.target=java.lang.String\ getLbName()
+comment2.text=\r\n\ Question\ 4(a)\r\n\ This\ method\ simply\ returns\ the\ name\ of\ \r\n\ the\ load\ balancer\ instance\r\n\r\n\ @return\ \ \ \ The\ name\ of\ the\ load\ balancer\r\n
+comment3.params=
+comment3.target=int\ numberOfVmsHeld()
+comment3.text=\r\n\ Question\ 4(a)\r\n\ This\ method\ simply\ returns\ the\ number\r\n\ of\ VMs\ held\ by\ the\ organisation\ instance\ in\r\n\ its\ registered\ Vms\ collection\r\n\r\n\ @return\ \ \ \ The\ number\ of\ vms\ in\ this\ instance's\ collection\r\n
+comment4.params=
+comment4.target=void\ addMachines()
+comment4.text=\r\n\ This\ toString\ method\ overrides\ the\ same\ method\r\n\ in\ the\ Object\ class\ and\ returns\ a\ list\ of\ all\r\n\ currently\ help\ vms\ and\ includes\ their\ information\r\n\ \r\n\ @return\ all\ held\ vms\ and\ their\ information\r\n
+comment5.params=
+comment5.target=java.lang.String\ toString()
+comment6.params=
+comment6.target=void\ clear()
+comment7.params=
+comment7.target=void\ populate()
+numComments=8
