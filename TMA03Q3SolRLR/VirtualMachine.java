@@ -1,4 +1,4 @@
-
+import java.lang.Comparable;
 /**
  * Question 3(c)
  * 
@@ -12,7 +12,7 @@
  */
 
 
-public class VirtualMachine
+public class VirtualMachine implements Comparable<VirtualMachine>
 {
     //Question 3(c)
     
@@ -20,7 +20,7 @@ public class VirtualMachine
     public static int machineCreationNumber = 1;
     
     //Instance fields
-    private String machineID;
+    private String machineId;
     private double cpuMaxGHz;
     private int physicalMemory;
     private int connectedUsers;
@@ -37,7 +37,7 @@ public class VirtualMachine
     {
         cpuMaxGHz = newCpuMaxGHz;
         physicalMemory = newPhysicalMemory;
-        machineID = "VM: " + machineCreationNumber;
+        machineId = "VM: " + machineCreationNumber;
         machineCreationNumber++;
         connectedUsers = 0;
     }
@@ -55,8 +55,12 @@ public class VirtualMachine
     @Override
     public String toString()
     {
-        String returnedString = "Virtual machine " + "'" + getMachineID() + "'" + " has a max CPU speed of " + getCpuSpeed() + "," + "\n"
-        + "has " + getPhysMemory() + " Gigabytes of physical memory and currently has " + getNumUsers() +
+        String returnedString = "Virtual machine " + "'" 
+        + getMachineId() + "'" + " has a max CPU speed of " 
+        + getCpuSpeed() + ","
+        + "has " + getPhysMemory() + 
+        " Gigabytes of physical memory and currently has " 
+        + getNumUsers() +
         " users connected.";
         
         return returnedString;
@@ -70,9 +74,9 @@ public class VirtualMachine
      *
      * @return Returns machineID of the virtual machine
      */
-    public String getMachineID()
+    public String getMachineId()
     {
-        return machineID;
+        return machineId;
     }
     
     /**
@@ -139,15 +143,15 @@ public class VirtualMachine
      *same object, false if not
      */
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object comparedObj)
     {
         //if same memory address, obviously is same object
-        if(obj == this)
+        if(comparedObj == this)
         {
             return true;
         } 
         
-        if(!(obj instanceof VirtualMachine))
+        if(!(comparedObj instanceof VirtualMachine))
         {
             return false;
         }
@@ -155,29 +159,45 @@ public class VirtualMachine
         /**If not same memory address but of same object type, check then if
          * machineID is the same. If so, return true and if not, return false
          */
-        VirtualMachine comparedMachine = (VirtualMachine) obj;
-        return comparedMachine.getMachineID().equals(getMachineID());
+        VirtualMachine comparedMachine = (VirtualMachine) comparedObj;
+        return comparedMachine.getMachineId().equals(getMachineId());
     }
     
     
     /**
      * Question 3(c)(ii)
      * Overridden method of Object class. Returns unique identifier
-     * to allow VirtualMachine objects to be stored in a set
+     * using String's built-in hashcode, as an int datatype is needed
+     * if overriding hashCode()
      * 
      * @return Unique hashcode for instance of virtual machine
      */
     @Override
     public int hashCode()
     {
-        return getMachineID().hashCode();
+        return getMachineId().hashCode();
     }
     
+    /**
+     * Question 3(c)(ii)
+     * This implementation overrides the generic Comparable 
+     * interface offered by java.lang.Comparable 
+     * interface, and compares virtual machines based 
+     * on their machineIDs, where if the invoking
+     * object has a lower VM number, -1 is return. If it's
+     * the same object, 0 is returned and if it has a higher 
+     * machineID number than the compared
+     * object, 1 is returned
+     * 
+     * @return an indicator if machineID is higher, lower or the
+     * same as the compared object
+     */
     
-    public void compareTo()
+    @Override
+    public int compareTo(VirtualMachine otherVm)
     
     {
-        //complete
+        return this.machineId.compareTo(otherVm.machineId);
     }
     
     
