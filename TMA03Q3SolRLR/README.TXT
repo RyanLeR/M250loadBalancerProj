@@ -1,12 +1,9 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all they need to know. The comments should usually include at least:
-------------------------------------------------------------------------
+PROJECT TITLE: Load balancer managed virtual machines
+PURPOSE OF PROJECT: This project simulates or represents a small network including a number of virtual machines
+that are managed and tracked by a load balancer that, if extended, could help in managing traffic to the virtual machines.
+This project serves to solidify the understanding of objects of interest and an organization class that holds those objects.
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
+DATE: 10 May 2026
 HOW TO START THIS PROJECT:
 AUTHORS:
 USER INSTRUCTIONS:

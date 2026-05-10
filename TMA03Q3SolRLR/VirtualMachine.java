@@ -200,7 +200,17 @@ public class VirtualMachine implements Comparable<VirtualMachine>
         return this.machineId.compareTo(otherVm.machineId);
     }
     
+    /**
+     * This method sets the number of connected users
+     * for a virtual machine instance
+     * 
+     * @param Number of connected users we want
+     */
     
+    public void setNumUsers(int usersToSet)
+    {
+        connectedUsers = usersToSet;
+    }
     
     
     

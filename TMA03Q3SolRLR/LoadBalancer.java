@@ -2,6 +2,10 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
+
 /**
  * Question 4(a)
  *This class creates load balancer objects, 
@@ -124,6 +128,7 @@ public class LoadBalancer
         
         Random randCpuDec = new Random();
         double newRandCpuDec = (randCpuDec.nextDouble() * 0.8) + 0.1;
+        newRandCpuDec = Math.round(newRandCpuDec * 10.0) / 10.0;
         
         return newRandCpuInt + newRandCpuDec;
     }
@@ -200,9 +205,6 @@ public class LoadBalancer
      */
     public boolean removeVmEntry(String soughtVmId)
     {
-        
-        
-        
         boolean objFound = false;
         
         if(machineExists(soughtVmId))
@@ -230,42 +232,8 @@ public class LoadBalancer
             }
         
         }
-
         return objFound;
-        
     }
-    
-    /**
-     * public boolean removeVmEntry(String soughtVmId)
-    {
-        boolean objFound = false;
-        
-        VirtualMachine soughtObj;
-        for(VirtualMachine targetMachine : registeredVms.values())
-        {
-            if(targetMachine.getMachineId().equals(soughtVmId))
-            {
-                objFound = true;
-                for(String targetKey : registeredVms.keySet())
-                {
-                    VirtualMachine innerTargetMachine = registeredVms.get(targetKey);
-                    if(innerTargetMachine.getMachineId().equals(soughtVmId))
-                    {
-                        String foundId = soughtVmId;
-                    }
-                }
-            }
-        }
-        
-        if(objFound == true)
-        {
-            registeredVms.remove(soughtVmId);
-        }
-        
-        return objFound;
-        
-    }
-     */
     
     /**
      * This helper method determines if a machine with
@@ -285,8 +253,148 @@ public class LoadBalancer
         return ans;
     }
     
+    /**
+     * Question 4(b)(v)
+     * This helper method targets a machine in
+     * registeredVms and sets its number of users
+     * as long as the entered number is less than
+     * 25 and a machine with the given Id exists
+     * in registeredVms
+     * 
+     * @param Target Vm
+     * @param Number of users to set
+     * 
+     * @throws IllegalArgumentException if attempt is made to add
+     * too many users or target machine with given Id doesnt exist
+     */
+    public boolean changeVmUsers(String targetVmId, int numUsersToSet)
+    {
+        boolean foundAndSet = false;
+        if(!machineExists(targetVmId) || numUsersToSet > 25)
+        {
+            throw new IllegalArgumentException("Machine not found or " +
+            "attempt to set too many users.");
+        }
+        else
+        {
+            foundAndSet = true;
+            VirtualMachine targetMachine = registeredVms.get(targetVmId);
+            targetMachine.setNumUsers(numUsersToSet);   
+        }
+        return foundAndSet;
+    }
     
+    /**
+     * Question 4(b)(vi)
+     * This method returns the average Cpu speed of all machines
+     * with the specified RAM type. Only 16 or 32 are allowed
+     * as input values, otherwise an exception is thrown.
+     * 
+     * @return average Cpu speed of machines filtered on RAM amount
+     * 
+     * @throws IllegalArgumentException if invalid RAM amount is entered
+     */
+    public double calcAvgCpuSpeed(int filteredRamAmount)
+    {
+        if(filteredRamAmount != 16 && filteredRamAmount != 32)
+        {
+            throw new IllegalArgumentException("Invalid RAM amount");
+        }
+        double avgCpuSpeed = 0.0;
+        int unitCount = 0;
+        for(VirtualMachine nextMachine : registeredVms.values())
+        {
+            if(nextMachine.getPhysMemory() == filteredRamAmount)
+            {
+                unitCount++;
+                avgCpuSpeed = avgCpuSpeed + nextMachine.getCpuSpeed();
+            }
+        }
+        
+        avgCpuSpeed = avgCpuSpeed / unitCount;
+        avgCpuSpeed = Math.round(avgCpuSpeed * 10.0) / 10.0;
+        
+        return avgCpuSpeed;
+    }
     
+    /**
+     * Question 4(b)(vii)
+     * This method takes as an argument some TreeMap of virtual
+     * machines, prints headings to create a summary table,
+     * and lists the state of all objects in the map
+     * below the headings
+     * 
+     * @param A TreeMap that contains Virtual Machine objects
+     */
+    public void summaryOfMachines(TreeMap<String,VirtualMachine> checkedMap)
+    {
+        System.out.println("Machine ID    Available Ram    Max CPU speed    Connected users");
+        System.out.println("---------------------------------------------------------------");
+        for(VirtualMachine thisMachine : checkedMap.values())
+        {
+            String printRecord = thisMachine.getMachineId() 
+            + "            " 
+            + thisMachine.getPhysMemory() + "                "
+            + thisMachine.getCpuSpeed() + "                    "
+            + thisMachine.getNumUsers();
+            System.out.println(printRecord);
+        }
+    }
     
+    /**
+     * Question 4(b)(viii)
+     * This method takes as an argument some TreeMap of virtual
+     * machines, prints headings to create a summary table,
+     * and lists the state of all objects in the map
+     * that match a filter for RAM amount
+     * 
+     * @param A TreeMap that contains Virtual Machine objects
+     */
+    public void summaryVmsByRam(TreeMap<String,VirtualMachine> checkedMap, int filteredRamAmount)
+    {
+        System.out.println("Machine ID    Available Ram    Max CPU speed    Connected users");
+        System.out.println("---------------------------------------------------------------");
+        for(VirtualMachine thisMachine : checkedMap.values())
+        {
+            if(thisMachine.getPhysMemory() == filteredRamAmount)
+            {
+                String printRecord = thisMachine.getMachineId() 
+                + "            " 
+                + thisMachine.getPhysMemory() + "                "
+                + thisMachine.getCpuSpeed() + "                    "
+                + thisMachine.getNumUsers();
+                System.out.println(printRecord);
+            }
+        }
+    }
     
+    public TreeMap<String, VirtualMachine> getMap()
+    {
+        return registeredVms;
+    }
+    
+    public boolean writeCSVFile(String fileName, TreeMap<String, VirtualMachine> mapToSave)
+    {
+        boolean ans = false;
+        try {
+           BufferedWriter newWriter = new BufferedWriter(
+               new FileWriter(fileName));
+               for(VirtualMachine thisMachine : registeredVms.values())
+               {
+                   String toWrite = "";
+                   toWrite = thisMachine.getMachineId() 
+                   + "," + thisMachine.getPhysMemory() 
+                   + "," + thisMachine.getCpuSpeed() 
+                   + "," + thisMachine.getNumUsers() + "\n";
+                   newWriter.write(toWrite);
+               }
+               newWriter.close();
+               ans = true;
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+        } catch (Exception ex) {
+            System.out.println("Another kind of exception");
+        }
+        return ans;
+    }
 }
